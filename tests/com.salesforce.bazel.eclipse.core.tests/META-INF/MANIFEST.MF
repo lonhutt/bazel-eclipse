@@ -6,7 +6,7 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Salesforce
 Fragment-Host: com.salesforce.bazel.eclipse.core;bundle-version="1.2.3"
 Automatic-Module-Name: com.salesforce.bazel.eclipse.core.tests
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Require-Bundle: org.junit;bundle-version="4.13.0",
  com.salesforce.bazel-java-testframework;bundle-version="1.0.0",
  org.mockito.mockito-core;bundle-version="4.6.1"

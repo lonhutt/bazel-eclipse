@@ -63,99 +63,113 @@ import com.salesforce.bazel.sdk.workspace.BazelWorkspaceScanner;
 public final class BazelProjectImporter extends AbstractProjectImporter {
     private static final LogHelper LOG = LogHelper.log(BazelProjectImporter.class);
 
-	@Override
-	public boolean applies(IProgressMonitor monitor) throws OperationCanceledException, CoreException {
-		// Since the actual preferences come from the VSCode via LSP, it is not defined
-		// when we get them. But this is the place where we need them for sure,
-		// this is why we obtain them here. Right now the preferences have already
-		// come from VSCode.
-		// It will still work well for others UI clients.
-		final B2EPreferncesManager preferencesManager = preparePreferences();
+    @Override
+    public boolean applies(IProgressMonitor monitor) throws OperationCanceledException, CoreException {
+        // Since the actual preferences come from the VSCode via LSP, it is not defined
+        // when we get them. But this is the place where we need them for sure,
+        // this is why we obtain them here. Right now the preferences have already
+        // come from VSCode.
+        // It will still work well for others UI clients.
+        final B2EPreferncesManager preferencesManager = preparePreferences();
 
-		if (!checkIsBazelImportEnabled(preferencesManager) || !checkRootFolder()) {
-			return false;
-		}
+        if (!checkIsBazelImportEnabled(preferencesManager) || !checkRootFolder()) {
+            return false;
+        }
 
-		// See MavenProjectImporter for details why this side-effect is here
-		directories = Arrays.asList(Path.of(rootFolder.getPath()));
+        // See MavenProjectImporter for details why this side-effect is here
+        directories = Arrays.asList(Path.of(rootFolder.getPath()));
 
-		return true;
+        return true;
 
-	}
+    }
 
-	@Override
-	public void importToWorkspace(IProgressMonitor monitor) throws OperationCanceledException, CoreException {
-		try {
-			// TODO the SDK now has pluggable lang support (alas, java is the only option now)
-			// which means at some point you need to initialize the Java features of the SDK
-			BazelWorkspaceScanner workspaceScanner = new BazelWorkspaceScanner();
-			BazelPackageLocation workspaceRootPackage = workspaceScanner.getPackages(rootFolder.getAbsolutePath());
+    @Override
+    public void importToWorkspace(IProgressMonitor monitor) throws OperationCanceledException, CoreException {
+        try {
+            // TODO the SDK now has pluggable lang support (alas, java is the only option now)
+            // which means at some point you need to initialize the Java features of the SDK
+            BazelWorkspaceScanner workspaceScanner = new BazelWorkspaceScanner();
+            BazelPackageLocation workspaceRootPackage = workspaceScanner.getPackages(rootFolder.getAbsolutePath());
 
-			if (workspaceRootPackage == null) {
-				throw new IllegalArgumentException();
-			}
+            if (workspaceRootPackage == null) {
+                throw new IllegalArgumentException();
+            }
 
-			List<BazelPackageLocation> allBazelPackages = new ArrayList<>(workspaceRootPackage.gatherChildren());
+            List<BazelPackageLocation> allBazelPackages = new ArrayList<>(workspaceRootPackage.gatherChildren());
 
-			List<BazelPackageLocation> bazelPackagesToImport = allBazelPackages;
+            List<BazelPackageLocation> bazelPackagesToImport = allBazelPackages;
 
-			File targetsFile = new File(rootFolder, BazelBuildSupport.BAZELPROJECT_FILE_NAME_SUFIX);
+            File targetsFile = new File(rootFolder, BazelBuildSupport.BAZELPROJECT_FILE_NAME_SUFIX);
 
-			if (targetsFile.exists()) {
-				ProjectView projectView = new ProjectView(rootFolder, readFile(targetsFile.getPath()));
+            List<Path> bazelProjectFiles = Files
+                    .find(rootFolder.toPath(), 5,
+                        (path, attr) -> path.getFileName().toString()
+                                .equalsIgnoreCase(BazelBuildSupport.BAZELPROJECT_FILE_NAME_SUFIX))
+                    .collect(Collectors.toList());
 
-				Set<String> projectViewPaths = projectView.getDirectories().stream()
-						.map(BazelPackageLocation::getBazelPackageFSRelativePath).collect(Collectors.toSet());
+            /* right now we only support/expect a single .bazelproject file in a given workspace
+             * because of this just grab the first search result from the above file search    
+             * TODO: revisit this assumption  
+             */
+            if (!bazelProjectFiles.isEmpty()) {
+                targetsFile = bazelProjectFiles.get(0).toFile();
+            }
 
-				bazelPackagesToImport = allBazelPackages.stream()
-						.filter(bpi -> projectViewPaths.contains(getBazelPackageRelativePath(bpi)))
-						.collect(Collectors.toList());
-			}
+            if (targetsFile.exists()) {
+                ProjectView projectView = new ProjectView(rootFolder, readFile(targetsFile.getPath()));
 
-			WorkProgressMonitor progressMonitor = WorkProgressMonitor.NOOP;
+                Set<String> projectViewPaths = projectView.getDirectories().stream()
+                        .map(BazelPackageLocation::getBazelPackageFSRelativePath).collect(Collectors.toSet());
 
-			BazelEclipseProjectFactory.importWorkspace(workspaceRootPackage, bazelPackagesToImport, progressMonitor,
-					monitor);
-		} catch (IOException e) {
-		    LOG.error("Import into workspace failed", e);
-		}
-	}
+                bazelPackagesToImport = allBazelPackages.stream()
+                        .filter(bpi -> projectViewPaths.contains(getBazelPackageRelativePath(bpi)))
+                        .collect(Collectors.toList());
+            }
 
-	private String getBazelPackageRelativePath(BazelPackageLocation bpi) {
-		return SystemUtils.IS_OS_WINDOWS ? //
-				bpi.getBazelPackageFSRelativePath().replaceAll("\\\\", "/") : //
-					bpi.getBazelPackageFSRelativePath();
-	}
+            WorkProgressMonitor progressMonitor = WorkProgressMonitor.NOOP;
 
-	@Override
-	public void reset() {
+            BazelEclipseProjectFactory.importWorkspace(workspaceRootPackage, bazelPackagesToImport, progressMonitor,
+                monitor);
+        } catch (IOException e) {
+            LOG.error("Import into workspace failed", e);
+        }
+    }
 
-	}
+    private String getBazelPackageRelativePath(BazelPackageLocation bpi) {
+        return SystemUtils.IS_OS_WINDOWS ? //
+                bpi.getBazelPackageFSRelativePath().replaceAll("\\\\", "/") : //
+                bpi.getBazelPackageFSRelativePath();
+    }
 
-	private static String readFile(String path) {
-		try {
-			return new String(Files.readAllBytes(Paths.get(path)));
-		} catch (IOException ex) {
-			throw new IllegalStateException(ex);
-		}
-	}
+    @Override
+    public void reset() {
+
+    }
+
+    private static String readFile(String path) {
+        try {
+            return new String(Files.readAllBytes(Paths.get(path)));
+        } catch (IOException ex) {
+            throw new IllegalStateException(ex);
+        }
+    }
 
     private B2EPreferncesManager preparePreferences() {
         final Map<String, Object> jdtlsPrefs = BazelJdtPlugin.getDefault().getJdtLsPreferences();
         final B2EPreferncesManager preferencesManager = B2EPreferncesManager.getInstance();
 
-		preferencesManager.setConfiguration(jdtlsPrefs);
+        preferencesManager.setConfiguration(jdtlsPrefs);
 
-		return preferencesManager;
-	}
+        return preferencesManager;
+    }
 
-	private boolean checkRootFolder() {
-		return rootFolder != null && rootFolder.exists() && rootFolder.isDirectory()
-				&& (new File(rootFolder, BazelBuildSupport.WORKSPACE_FILE_NAME).exists() || new File(rootFolder,
-						BazelBuildSupport.WORKSPACE_FILE_NAME + BazelBuildSupport.BAZEL_FILE_NAME_SUFIX).exists());
-	}
+    private boolean checkRootFolder() {
+        return rootFolder != null && rootFolder.exists() && rootFolder.isDirectory()
+                && (new File(rootFolder, BazelBuildSupport.WORKSPACE_FILE_NAME).exists() || new File(rootFolder,
+                        BazelBuildSupport.WORKSPACE_FILE_NAME + BazelBuildSupport.BAZEL_FILE_NAME_SUFIX).exists());
+    }
 
-	private boolean checkIsBazelImportEnabled(final B2EPreferncesManager preferencesManager) {
-		return preferencesManager != null && preferencesManager.isImportBazelEnabled();
-	}
+    private boolean checkIsBazelImportEnabled(final B2EPreferncesManager preferencesManager) {
+        return preferencesManager != null && preferencesManager.isImportBazelEnabled();
+    }
 }

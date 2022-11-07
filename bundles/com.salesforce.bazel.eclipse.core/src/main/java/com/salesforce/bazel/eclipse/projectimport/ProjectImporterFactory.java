@@ -42,6 +42,7 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.salesforce.bazel.eclipse.component.ComponentContext;
+import com.salesforce.bazel.eclipse.projectimport.flow.CleanProjectsFlow;
 import com.salesforce.bazel.eclipse.projectimport.flow.CreateProjectsFlow;
 import com.salesforce.bazel.eclipse.projectimport.flow.CreateRootProjectFlow;
 import com.salesforce.bazel.eclipse.projectimport.flow.DetermineTargetsFlow;
@@ -114,6 +115,7 @@ public class ProjectImporterFactory {
             new DetermineTargetsFlow(bazelCommandManager, bazelProjectManager, resourceHelper),
             new LoadAspectsFlow(bazelCommandManager, bazelProjectManager, resourceHelper),
             new LoadTargetsFlow(bazelCommandManager, bazelProjectManager, resourceHelper),
+            new CleanProjectsFlow(bazelCommandManager, bazelProjectManager, resourceHelper),
             new CreateRootProjectFlow(bazelCommandManager, bazelProjectManager, resourceHelper),
             new OrderProjectsFlow(), new CreateProjectsFlow(bazelCommandManager, bazelProjectManager, resourceHelper),
             new SetupProjectBuildersFlow(), new SetupRootClasspathContainerFlow(),

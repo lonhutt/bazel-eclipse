@@ -44,6 +44,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import com.salesforce.bazel.eclipse.component.ComponentContext;
 import com.salesforce.bazel.eclipse.projectimport.flow.BjlsFlowProjectImporter;
 import com.salesforce.bazel.eclipse.projectimport.flow.BjlsSetupClasspathContainersFlow;
+import com.salesforce.bazel.eclipse.projectimport.flow.CleanProjectsFlow;
 import com.salesforce.bazel.eclipse.projectimport.flow.CreateProjectsFlow;
 import com.salesforce.bazel.eclipse.projectimport.flow.CreateRootProjectFlow;
 import com.salesforce.bazel.eclipse.projectimport.flow.DetermineTargetsFlow;
@@ -98,9 +99,7 @@ public class ProjectImporterFactory {
 
     public ProjectImporter build() {
         return new BjlsFlowProjectImporter(flows.toArray(new ImportFlow[flows.size()]), bazelWorkspaceRootPackageInfo,
-                selectedBazelPackages, projectOrderResolver,
-                BazelCompilerUtils.getOSBazelPath(),
-                importInProgress);
+                selectedBazelPackages, projectOrderResolver, BazelCompilerUtils.getOSBazelPath(), importInProgress);
     }
 
     private static List<ImportFlow> createFlows() {
@@ -114,10 +113,10 @@ public class ProjectImporterFactory {
             new DetermineTargetsFlow(bazelCommandManager, bazelProjectManager, resourceHelper),
             new LoadAspectsFlow(bazelCommandManager, bazelProjectManager, resourceHelper),
             new LoadTargetsFlow(bazelCommandManager, bazelProjectManager, resourceHelper),
+            new CleanProjectsFlow(bazelCommandManager, bazelProjectManager, resourceHelper),
             new CreateRootProjectFlow(bazelCommandManager, bazelProjectManager, resourceHelper),
             new OrderProjectsFlow(), new CreateProjectsFlow(bazelCommandManager, bazelProjectManager, resourceHelper),
-            new SetupProjectBuildersFlow(),
-            new BjlsSetupClasspathContainersFlow(bazelCommandManager, bazelProjectManager, resourceHelper,
-                ComponentContext.getInstance().getJavaCoreHelper())));
+            new SetupProjectBuildersFlow(), new BjlsSetupClasspathContainersFlow(bazelCommandManager,
+                    bazelProjectManager, resourceHelper, ComponentContext.getInstance().getJavaCoreHelper())));
     }
 }

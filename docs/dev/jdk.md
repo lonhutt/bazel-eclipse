@@ -10,7 +10,7 @@ We like the project configuration approach because it will be automatically be a
 The JDK version is set in each plugin's *MANIFEST.MF* file:
 
 ```
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 ```
 
 ### Eclipse SDK Workspace JDK Configuration

@@ -5,7 +5,7 @@ Bundle-SymbolicName: com.salesforce.bazel-java-testframework
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Salesforce
 Automatic-Module-Name: com.salesforce.bazel.java.sdk.tests
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Require-Bundle: org.junit;bundle-version="4.13.0",
  com.salesforce.bazel-java-sdk;bundle-version="1.2.3",
  net.bytebuddy.byte-buddy;bundle-version="1.9.0",

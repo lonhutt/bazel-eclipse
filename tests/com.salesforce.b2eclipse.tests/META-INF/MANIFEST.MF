@@ -17,6 +17,6 @@ Require-Bundle: com.salesforce.b2eclipse.jdt.ls,
  org.apache.commons.io,
  com.google.gson,
  com.google.guava;bundle-version="27.1.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Bundle-ActivationPolicy: lazy
 

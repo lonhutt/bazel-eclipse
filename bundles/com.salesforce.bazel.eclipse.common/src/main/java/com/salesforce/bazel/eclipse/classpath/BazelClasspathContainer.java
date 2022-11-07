@@ -78,9 +78,9 @@ public class BazelClasspathContainer extends BaseBazelClasspathContainer {
 
     public BazelClasspathContainer(IProject eclipseProject) throws IOException, InterruptedException,
             BackingStoreException, JavaModelException, BazelCommandLineToolConfigurationException {
-        this(eclipseProject, ComponentContext.getInstance().getResourceHelper(), ComponentContext.getInstance().getJavaCoreHelper(),
-            ComponentContext.getInstance().getProjectManager(), ComponentContext.getInstance().getOsStrategy(),
-                ComponentContext.getInstance().getBazelWorkspace());
+        this(eclipseProject, ComponentContext.getInstance().getResourceHelper(),
+                ComponentContext.getInstance().getJavaCoreHelper(), ComponentContext.getInstance().getProjectManager(),
+                ComponentContext.getInstance().getOsStrategy(), ComponentContext.getInstance().getBazelWorkspace());
     }
 
     public BazelClasspathContainer(IProject eclipseProject, ResourceHelper resourceHelper, JavaCoreHelper jcHelper,
