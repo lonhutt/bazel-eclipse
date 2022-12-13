@@ -119,7 +119,7 @@ public class ProjectViewEditor extends AbstractDecoratedTextEditor {
     protected void editorSaved() {
         super.editorSaved();
         String projectViewContent = getSourceViewer().getTextWidget().getText();
-        ProjectView proposedProjectView = new ProjectView(rootDirectory, projectViewContent);
+        ProjectView proposedProjectView = ProjectView.getProjectView(rootDirectory, projectViewContent);
         List<BazelPackageLocation> invalidPackages = new ArrayList<>();
         proposedProjectView = ProjectViewProcessor.resolvePackages(proposedProjectView, invalidPackages);
         List<BazelProblem> problems = new ArrayList<>();

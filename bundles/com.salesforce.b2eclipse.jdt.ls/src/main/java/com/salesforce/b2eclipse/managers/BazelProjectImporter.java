@@ -99,24 +99,25 @@ public final class BazelProjectImporter extends AbstractProjectImporter {
 
             List<BazelPackageLocation> bazelPackagesToImport = allBazelPackages;
 
-            File targetsFile = new File(rootFolder, BazelBuildSupport.BAZELPROJECT_FILE_NAME_SUFIX);
+            ProjectView projectView = ProjectView.getProjectView(rootFolder);
+            if (projectView == null) {
+                List<Path> bazelProjectFiles = Files
+                        .find(rootFolder.toPath(), 5,
+                            (path, attr) -> path.getFileName().toString()
+                                    .equalsIgnoreCase(BazelBuildSupport.BAZELPROJECT_FILE_NAME_SUFIX))
+                        .collect(Collectors.toList());
 
-            List<Path> bazelProjectFiles = Files
-                    .find(rootFolder.toPath(), 5,
-                        (path, attr) -> path.getFileName().toString()
-                                .equalsIgnoreCase(BazelBuildSupport.BAZELPROJECT_FILE_NAME_SUFIX))
-                    .collect(Collectors.toList());
-
-            /* right now we only support/expect a single .bazelproject file in a given workspace
-             * because of this just grab the first search result from the above file search    
-             * TODO: revisit this assumption  
-             */
-            if (!bazelProjectFiles.isEmpty()) {
-                targetsFile = bazelProjectFiles.get(0).toFile();
+                /* right now we only support/expect a single .bazelproject file in a given workspace
+                 * because of this just grab the first search result from the above file search    
+                 * TODO: revisit this assumption  
+                 */
+                if (!bazelProjectFiles.isEmpty()) {
+                    projectView = ProjectView.getProjectView(rootFolder,
+                        readFile(bazelProjectFiles.get(0).toFile().getPath()));
+                }
             }
 
-            if (targetsFile.exists()) {
-                ProjectView projectView = new ProjectView(rootFolder, readFile(targetsFile.getPath()));
+            if (projectView != null) {
 
                 Set<String> projectViewPaths = projectView.getDirectories().stream()
                         .map(BazelPackageLocation::getBazelPackageFSRelativePath).collect(Collectors.toSet());

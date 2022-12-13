@@ -27,6 +27,7 @@ import com.salesforce.bazel.eclipse.component.ComponentContext;
 import com.salesforce.bazel.sdk.command.BazelCommandManager;
 import com.salesforce.bazel.sdk.command.BazelWorkspaceCommandRunner;
 import com.salesforce.bazel.sdk.logging.LogHelper;
+import com.salesforce.bazel.sdk.project.ProjectView;
 
 @SuppressWarnings("restriction")
 public class BazelBuildSupport implements IBuildSupport {
@@ -84,8 +85,8 @@ public class BazelBuildSupport implements IBuildSupport {
         importer.initialize(ComponentContext.getInstance().getBazelWorkspace().getBazelWorkspaceRootDirectory());
 
         BazelCommandManager bazelCommandManager = ComponentContext.getInstance().getBazelCommandManager();
-        BazelWorkspaceCommandRunner bazelWorkspaceCmdRunner = bazelCommandManager
-                .getWorkspaceCommandRunner(ComponentContext.getInstance().getBazelWorkspace());
+        BazelWorkspaceCommandRunner bazelWorkspaceCmdRunner =
+                bazelCommandManager.getWorkspaceCommandRunner(ComponentContext.getInstance().getBazelWorkspace());
 
         bazelWorkspaceCmdRunner.flushAspectInfoCache();
 
@@ -125,7 +126,12 @@ public class BazelBuildSupport implements IBuildSupport {
         if (resource == null || !applies(resource.getProject())) {
             return false;
         }
-        return IBuildSupport.super.fileChanged(resource, changeType, monitor) || isBuildFile(resource);
+        boolean result = IBuildSupport.super.fileChanged(resource, changeType, monitor) || isBuildFile(resource);
+        if (result) {
+            ProjectView.clearProjectView(
+                ComponentContext.getInstance().getBazelWorkspace().getBazelWorkspaceRootDirectory());
+        }
+        return result;
     }
 
     private IProjectImporter obtainBazelImporter() {

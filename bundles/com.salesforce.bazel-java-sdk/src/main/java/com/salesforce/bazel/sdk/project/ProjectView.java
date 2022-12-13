@@ -36,6 +36,7 @@ package com.salesforce.bazel.sdk.project;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,6 +83,8 @@ public class ProjectView {
     private final Map<BazelPackageLocation, Integer> packageToLineNumber;
     private final Map<BazelLabel, Integer> targetToLineNumber;
 
+    private static final Map<File, ProjectView> projectViewCache = new HashMap<>();
+
     /**
      * Create a new ProjectView instance with the specified directories and targets.
      */
@@ -98,7 +101,7 @@ public class ProjectView {
     /**
      * Creates a new ProjectView instance with the specified raw content.
      */
-    public ProjectView(File rootWorkspaceDirectory, String content) {
+    private ProjectView(File rootWorkspaceDirectory, String content) {
         this.rootWorkspaceDirectory = rootWorkspaceDirectory;
         Map<BazelPackageLocation, Integer> pl = new LinkedHashMap<>();
         Map<BazelLabel, Integer> tl = new LinkedHashMap<>();
@@ -106,6 +109,28 @@ public class ProjectView {
         packageToLineNumber = Collections.unmodifiableMap(pl);
         // this may get modified, so the map has to be mutable
         targetToLineNumber = tl;
+    }
+
+    public static ProjectView getProjectView(File rootWorkspaceDirectory, String content) {
+
+        if (!projectViewCache.containsKey(rootWorkspaceDirectory)) {
+            projectViewCache.put(rootWorkspaceDirectory, new ProjectView(rootWorkspaceDirectory, content));
+        }
+        return projectViewCache.get(rootWorkspaceDirectory);
+    }
+
+    public static ProjectView getProjectView(File rootWorkspaceDirectory) {
+        if (projectViewCache.containsKey(rootWorkspaceDirectory)) {
+            return projectViewCache.get(rootWorkspaceDirectory);
+        } else {
+            return null;
+        }
+    }
+
+    public static void clearProjectView(File rootWorkspaceDirectory) {
+        if (projectViewCache.containsKey(rootWorkspaceDirectory)) {
+            projectViewCache.remove(rootWorkspaceDirectory);
+        }
     }
 
     /**

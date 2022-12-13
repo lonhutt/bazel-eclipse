@@ -262,7 +262,7 @@ public class BazelImportWizardProjectTree {
                 String path = dialog.open();
                 if (path != null) {
                     Set<BazelPackageInfo> packagesToImport = new HashSet<>();
-                    ProjectView projectView = new ProjectView(
+                    ProjectView projectView = ProjectView.getProjectView(
                             new File(BazelImportWizardProjectTree.this.rootWorkspaceDirectory), readFile(path));
                     Set<String> projectViewPaths = projectView.getDirectories().stream()
                             .map(p -> p.getBazelPackageFSRelativePath()).collect(Collectors.toSet());

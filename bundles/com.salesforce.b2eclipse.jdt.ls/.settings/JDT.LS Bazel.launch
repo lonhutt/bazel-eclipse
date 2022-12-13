@@ -52,14 +52,13 @@
         <setEntry value="javax.annotation@default:default"/>
         <setEntry value="javax.inject@default:default"/>
         <setEntry value="javax.websocket@default:default"/>
-        <setEntry value="javax.xml@default:default"/>
         <setEntry value="org.apache.ant@default:default"/>
         <setEntry value="org.apache.batik.constants@default:default"/>
         <setEntry value="org.apache.batik.css@default:default"/>
         <setEntry value="org.apache.batik.i18n@default:default"/>
         <setEntry value="org.apache.batik.util@default:default"/>
         <setEntry value="org.apache.commons.codec@default:default"/>
-        <setEntry value="org.apache.commons.io*2.8.0.v20210415-0900@default:default"/>
+        <setEntry value="org.apache.commons.io@default:default"/>
         <setEntry value="org.apache.commons.jxpath@default:default"/>
         <setEntry value="org.apache.commons.lang3@default:default"/>
         <setEntry value="org.apache.commons.logging@default:default"/>
@@ -238,6 +237,7 @@
         <mapEntry key="org.eclipse.core.resources/build/interrupt" value="false"/>
         <mapEntry key="org.eclipse.core.resources/build/invoking" value="false"/>
         <mapEntry key="org.eclipse.core.resources/build/needbuild" value="false"/>
+        <mapEntry key="org.eclipse.core.resources/build/needbuilddelta" value="false"/>
         <mapEntry key="org.eclipse.core.resources/build/needbuildstack" value="false"/>
         <mapEntry key="org.eclipse.core.resources/build/stacktrace" value="false"/>
         <mapEntry key="org.eclipse.core.resources/contenttype" value="false"/>
@@ -317,16 +317,6 @@
         <mapEntry key="org.eclipse.e4.ui.workbench/trace/menus" value="false"/>
         <mapEntry key="org.eclipse.e4.ui.workbench/trace/renderer" value="false"/>
         <mapEntry key="org.eclipse.e4.ui.workbench/trace/workbench" value="false"/>
-        <mapEntry key="org.eclipse.ecf.provider.filetransfer.httpclient4/debug" value="false"/>
-        <mapEntry key="org.eclipse.ecf.provider.filetransfer.httpclient4/debug/exceptions/catching" value="false"/>
-        <mapEntry key="org.eclipse.ecf.provider.filetransfer.httpclient4/debug/exceptions/throwing" value="false"/>
-        <mapEntry key="org.eclipse.ecf.provider.filetransfer.httpclient4/debug/methods/entering" value="false"/>
-        <mapEntry key="org.eclipse.ecf.provider.filetransfer.httpclient4/debug/methods/exiting" value="false"/>
-        <mapEntry key="org.eclipse.ecf.provider.filetransfer.httpclient45/debug" value="false"/>
-        <mapEntry key="org.eclipse.ecf.provider.filetransfer.httpclient45/debug/exceptions/catching" value="false"/>
-        <mapEntry key="org.eclipse.ecf.provider.filetransfer.httpclient45/debug/exceptions/throwing" value="false"/>
-        <mapEntry key="org.eclipse.ecf.provider.filetransfer.httpclient45/debug/methods/entering" value="false"/>
-        <mapEntry key="org.eclipse.ecf.provider.filetransfer.httpclient45/debug/methods/exiting" value="false"/>
         <mapEntry key="org.eclipse.equinox.common/debug" value="false"/>
         <mapEntry key="org.eclipse.equinox.common/progress_monitors" value="false"/>
         <mapEntry key="org.eclipse.equinox.p2.core/artifacts/mirrors" value="false"/>
@@ -350,6 +340,9 @@
         <mapEntry key="org.eclipse.equinox.p2.engine/engine/debug" value="false"/>
         <mapEntry key="org.eclipse.equinox.p2.engine/enginesession/debug" value="false"/>
         <mapEntry key="org.eclipse.equinox.p2.engine/profileregistry/debug" value="false"/>
+        <mapEntry key="org.eclipse.equinox.p2.repository/credentials/debug" value="false"/>
+        <mapEntry key="org.eclipse.equinox.p2.repository/keyservice/debug" value="false"/>
+        <mapEntry key="org.eclipse.equinox.p2.repository/transport/debug" value="false"/>
         <mapEntry key="org.eclipse.equinox.preferences/general" value="false"/>
         <mapEntry key="org.eclipse.equinox.preferences/get" value="false"/>
         <mapEntry key="org.eclipse.equinox.preferences/set" value="false"/>
@@ -453,16 +446,9 @@
         <mapEntry key="org.eclipse.jface/newlook/preferences/showNewLook" value="false"/>
         <mapEntry key="org.eclipse.jface/trace/actions" value="false"/>
         <mapEntry key="org.eclipse.jface/trace/toolbarDisposal" value="false"/>
+        <mapEntry key="org.eclipse.lsp4e/debug" value="false"/>
         <mapEntry key="org.eclipse.ltk.core.refactoring/perf/participants/checkConditions" value="300"/>
         <mapEntry key="org.eclipse.ltk.core.refactoring/perf/participants/createChanges" value="300"/>
-        <mapEntry key="org.eclipse.m2e/actions" value="false"/>
-        <mapEntry key="org.eclipse.m2e/console" value="false"/>
-        <mapEntry key="org.eclipse.m2e/debug" value="false"/>
-        <mapEntry key="org.eclipse.m2e/debug/builder" value="false"/>
-        <mapEntry key="org.eclipse.m2e/debug/initialization" value="false"/>
-        <mapEntry key="org.eclipse.m2e/debug/projectManager" value="false"/>
-        <mapEntry key="org.eclipse.m2e/launcher" value="false"/>
-        <mapEntry key="org.eclipse.m2e/plugin" value="false"/>
         <mapEntry key="org.eclipse.osgi/debug" value="false"/>
         <mapEntry key="org.eclipse.osgi/debug/bundleFile" value="false"/>
         <mapEntry key="org.eclipse.osgi/debug/bundleFile/close" value="false"/>
@@ -532,6 +518,9 @@
         <mapEntry key="org.eclipse.team.ui/dnd" value="false"/>
         <mapEntry key="org.eclipse.team.ui/history" value="false"/>
         <mapEntry key="org.eclipse.team.ui/syncmodels" value="false"/>
+        <mapEntry key="org.eclipse.tm4e.ui/debug/log/GenerateTest" value="false"/>
+        <mapEntry key="org.eclipse.tm4e.ui/debug/log/ThrowError" value="false"/>
+        <mapEntry key="org.eclipse.tm4e.ui/trace" value="false"/>
         <mapEntry key="org.eclipse.ui.browser/debug" value="false"/>
         <mapEntry key="org.eclipse.ui.forms/debug" value="false"/>
         <mapEntry key="org.eclipse.ui.forms/debug/focus" value="false"/>
@@ -621,11 +610,6 @@
         <mapEntry key="org.eclipse.wst.common.environment/trace/ws_ant" value="true"/>
         <mapEntry key="org.eclipse.wst.common.environment/trace/ws_dt_cmd_engine" value="true"/>
         <mapEntry key="org.eclipse.wst.common.environment/trace/ws_framework" value="true"/>
-        <mapEntry key="org.eclipse.wst.common.project.facet.core/actionSorting" value="false"/>
-        <mapEntry key="org.eclipse.wst.common.project.facet.core/activation" value="false"/>
-        <mapEntry key="org.eclipse.wst.common.project.facet.core/delegate/calls" value="false"/>
-        <mapEntry key="org.eclipse.wst.common.project.facet.core/events/project" value="false"/>
-        <mapEntry key="org.eclipse.wst.common.project.facet.core/events/project/stacktrace" value="false"/>
         <mapEntry key="org.eclipse.wst.sse.core/debug" value="false"/>
         <mapEntry key="org.eclipse.wst.sse.core/dom/adapter/notification/time" value="false"/>
         <mapEntry key="org.eclipse.wst.sse.core/dom/adapter/notification/time/criteria" value="10"/>
@@ -647,51 +631,12 @@
         <mapEntry key="org.eclipse.wst.sse.core/tasks/preferences" value="false"/>
         <mapEntry key="org.eclipse.wst.sse.core/tasks/registry" value="false"/>
         <mapEntry key="org.eclipse.wst.sse.core/tasks/time" value="false"/>
-        <mapEntry key="org.eclipse.wst.sse.ui/actioncontributor/debugstatusfields" value="true"/>
-        <mapEntry key="org.eclipse.wst.sse.ui/contentOutline" value="false"/>
-        <mapEntry key="org.eclipse.wst.sse.ui/debug" value="false"/>
-        <mapEntry key="org.eclipse.wst.sse.ui/debug/reconcilerSpelling" value="false"/>
-        <mapEntry key="org.eclipse.wst.sse.ui/debug/reconcilerSpelling/showProblems" value="false"/>
-        <mapEntry key="org.eclipse.wst.sse.ui/debug/reconcilerValidatorEnablement" value="false"/>
-        <mapEntry key="org.eclipse.wst.sse.ui/debug/reconcilerValidatorSupported" value="false"/>
-        <mapEntry key="org.eclipse.wst.sse.ui/debug/reconcilerValidators" value="false"/>
-        <mapEntry key="org.eclipse.wst.sse.ui/debug/reconcilerjob" value="false"/>
-        <mapEntry key="org.eclipse.wst.sse.ui/debug/tracefilter" value=""/>
-        <mapEntry key="org.eclipse.wst.sse.ui/extendedconfigurationbuilder" value="false"/>
-        <mapEntry key="org.eclipse.wst.sse.ui/extendedconfigurationbuilder/time" value="false"/>
-        <mapEntry key="org.eclipse.wst.sse.ui/extendededitoractionbuilder" value="false"/>
-        <mapEntry key="org.eclipse.wst.sse.ui/extendededitoractionbuilder/contributetime" value="false"/>
-        <mapEntry key="org.eclipse.wst.sse.ui/extendededitoractionbuilder/debugmenu" value="false"/>
-        <mapEntry key="org.eclipse.wst.sse.ui/extendededitoractionbuilder/debugpopup" value="false"/>
-        <mapEntry key="org.eclipse.wst.sse.ui/extendededitoractionbuilder/debugtoolbar" value="false"/>
-        <mapEntry key="org.eclipse.wst.sse.ui/extendededitoractionbuilder/readtime" value="false"/>
-        <mapEntry key="org.eclipse.wst.sse.ui/filemodelprovider/lifecyclelistener" value="false"/>
-        <mapEntry key="org.eclipse.wst.sse.ui/filemodelprovider/modelstatelistener" value="false"/>
-        <mapEntry key="org.eclipse.wst.sse.ui/filemodelprovider/operations" value="false"/>
-        <mapEntry key="org.eclipse.wst.sse.ui/gotoNextAnnotation" value="false"/>
-        <mapEntry key="org.eclipse.wst.sse.ui/preferences-properties" value="false"/>
-        <mapEntry key="org.eclipse.wst.sse.ui/propertyChangeUpdateActionContributionItem" value="false"/>
-        <mapEntry key="org.eclipse.wst.sse.ui/propertySheet" value="false"/>
-        <mapEntry key="org.eclipse.wst.sse.ui/storagemodelprovider/elementstatelistener" value="false"/>
-        <mapEntry key="org.eclipse.wst.sse.ui/storagemodelprovider/operations" value="false"/>
-        <mapEntry key="org.eclipse.wst.sse.ui/structuredPresentationReconciler" value="false"/>
-        <mapEntry key="org.eclipse.wst.sse.ui/structuredPresentationReconciler/time" value="false"/>
-        <mapEntry key="org.eclipse.wst.sse.ui/transferbuilder/time" value="false"/>
-        <mapEntry key="org.eclipse.wst.validation/debug" value="false"/>
-        <mapEntry key="org.eclipse.wst.validation/extraValDetail" value=""/>
-        <mapEntry key="org.eclipse.wst.validation/filter/allExcept" value=""/>
-        <mapEntry key="org.eclipse.wst.validation/timings" value="false"/>
-        <mapEntry key="org.eclipse.wst.validation/timings/tracefile" value=""/>
-        <mapEntry key="org.eclipse.wst.validation/timings/useDoubles" value="false"/>
-        <mapEntry key="org.eclipse.wst.validation/trace/level" value=""/>
-        <mapEntry key="org.eclipse.wst.validation/v1" value="false"/>
         <mapEntry key="org.eclipse.wst.xml.core/debug" value="false"/>
         <mapEntry key="org.eclipse.wst.xml.core/debug/cmdocumentcache" value="false"/>
         <mapEntry key="org.eclipse.wst.xml.core/debug/cmdocumentmanager" value="false"/>
         <mapEntry key="org.eclipse.wst.xml.core/debug/tracefilter" value=""/>
         <mapEntry key="org.eclipse.wst.xml.core/debug/validation" value="false"/>
         <mapEntry key="org.eclipse.wst.xml.core/externalSchemaLocation" value="false"/>
-        <mapEntry key="org.eclipse.wst.xml.ui/projectionperf" value="false"/>
         <mapEntry key="org.eclipse.wtp.common/debug/loglevel" value="WARNING"/>
         <mapEntry key="org.eclipse.wtp.common/debug/logtrace" value="false"/>
         <mapEntry key="org.eclipse.wtp.common/debug/logtracefile" value="false"/>

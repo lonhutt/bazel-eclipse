@@ -20,7 +20,7 @@ public class ProjectViewTest {
         StringBuilder expectedContent = new StringBuilder();
         expectedContent.append(ProjectView.DIRECTORIES_SECTION).append(System.lineSeparator());
         expectedContent.append(ProjectView.INDENT).append(ProjectView.DIRECTORIES_COMMENT)
-                .append(System.lineSeparator());
+        .append(System.lineSeparator());
         expectedContent.append(ProjectView.INDENT).append("a/b/c").append(System.lineSeparator()); // $SLASH_OK bazel path
         expectedContent.append(ProjectView.INDENT).append("d/e/f").append(System.lineSeparator()); // $SLASH_OK bazel path
         List<BazelPackageLocation> packages = new ArrayList<>();
@@ -37,7 +37,7 @@ public class ProjectViewTest {
         StringBuilder expectedContent = new StringBuilder();
         expectedContent.append(ProjectView.DIRECTORIES_SECTION).append(System.lineSeparator());
         expectedContent.append(ProjectView.INDENT).append(ProjectView.DIRECTORIES_COMMENT)
-                .append(System.lineSeparator());
+        .append(System.lineSeparator());
         expectedContent.append(ProjectView.INDENT).append("a/b/c").append(System.lineSeparator()); // $SLASH_OK bazel path
         expectedContent.append(System.lineSeparator());
         expectedContent.append(ProjectView.TARGETS_SECTION).append(System.lineSeparator());
@@ -61,7 +61,7 @@ public class ProjectViewTest {
         content.append(ProjectView.TARGETS_SECTION).append(System.lineSeparator());
         content.append(ProjectView.INDENT).append("//a/b/c:t1").append(System.lineSeparator()); // $SLASH_OK bazel path
 
-        ProjectView projectView = new ProjectView(root, content.toString());
+        ProjectView projectView = ProjectView.getProjectView(root, content.toString());
         List<BazelPackageLocation> packages = projectView.getDirectories();
 
         assertEquals(2, packages.size());
@@ -108,7 +108,7 @@ public class ProjectViewTest {
     @Test(expected = UnsupportedOperationException.class)
     public void testUnmodifiableDirectories() {
         File root = new File(".");
-        ProjectView projectView = new ProjectView(root, "");
+        ProjectView projectView = ProjectView.getProjectView(root, "");
         projectView.getDirectories().add(null);
     }
 
