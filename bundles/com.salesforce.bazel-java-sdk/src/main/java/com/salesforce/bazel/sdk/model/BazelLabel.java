@@ -104,7 +104,8 @@ public class BazelLabel {
 
         if (isExternalRepoPath(labelPathStr)) {
             int i = labelPathStr.indexOf(BazelLabel.BAZEL_ROOT_SLASHES);
-            repositoryName = labelPathStr.substring(1, i);
+            
+            repositoryName = (labelPathStr.substring(1, i).isEmpty()) ? null : labelPathStr.substring(1, i);
             labelPathStr = labelPathStr.substring(i);
         } else {
             repositoryName = null;
