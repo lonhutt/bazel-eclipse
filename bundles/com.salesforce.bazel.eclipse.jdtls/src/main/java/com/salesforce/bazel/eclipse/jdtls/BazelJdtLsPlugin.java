@@ -40,6 +40,8 @@ import static java.util.Objects.requireNonNull;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
+import com.salesforce.bazel.eclipse.core.BazelRemoteLogger;
+
 /**
  * The activator class controls the Bazel Eclipse plugin life cycle
  */
@@ -54,6 +56,9 @@ public class BazelJdtLsPlugin extends Plugin implements BazelJdtLsSharedContstan
     @Override
     public void start(BundleContext bundleContext) throws Exception {
         super.start(bundleContext);
+
+        BazelRemoteLogger.info("bazel plugin started!");
+
         plugin = this;
     }
 

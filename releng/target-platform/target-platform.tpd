@@ -171,4 +171,9 @@ maven MavenDependencies scope=compile dependencyDepth=infinite missingManifest=g
 		artifactId="jakarta.servlet-api"
 		version="5.0.0"
 	}
+	dependency {
+		groupId="org.java-websocket"
+		artifactId="Java-WebSocket"
+		version="1.5.4"
+	}
 }

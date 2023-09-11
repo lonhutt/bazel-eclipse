@@ -28,6 +28,9 @@
          <command
                id="java.bazel.updateClasspaths">
          </command>
+         <command
+               id="java.bazel.register.ws">
+         </command>
       </delegateCommandHandler>
    </extension>
 </plugin>

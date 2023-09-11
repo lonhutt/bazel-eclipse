@@ -38,6 +38,7 @@
     <stringAttribute key="product" value="org.eclipse.sdk.ide"/>
     <setAttribute key="selected_features"/>
     <setAttribute key="selected_target_bundles">
+        <setEntry value="Java-WebSocket@default:default"/>
         <setEntry value="bcpg@default:default"/>
         <setEntry value="bcprov@default:default"/>
         <setEntry value="ch.qos.logback.classic@default:default"/>
@@ -47,14 +48,17 @@
         <setEntry value="com.google.gson@default:default"/>
         <setEntry value="com.google.guava*30.1.0.v20221112-0806@default:default"/>
         <setEntry value="com.google.guava*31.1.0.jre@default:default"/>
+        <setEntry value="com.google.guava*32.1.2.jre@default:default"/>
         <setEntry value="com.google.guava.failureaccess@default:default"/>
         <setEntry value="com.ibm.icu@default:default"/>
         <setEntry value="com.sun.jna.platform@default:default"/>
         <setEntry value="com.sun.jna@default:default"/>
+        <setEntry value="jakarta.inject.jakarta.inject-api@default:default"/>
         <setEntry value="javax.annotation@default:default"/>
-        <setEntry value="javax.inject@default:default"/>
-        <setEntry value="javax.xml@default:default"/>
+        <setEntry value="javax.websocket@default:default"/>
+        <setEntry value="jaxen@default:default"/>
         <setEntry value="org.apache.ant@default:default"/>
+        <setEntry value="org.apache.aries.spifly.dynamic.bundle@default:default"/>
         <setEntry value="org.apache.batik.constants@default:default"/>
         <setEntry value="org.apache.batik.css@default:default"/>
         <setEntry value="org.apache.batik.i18n@default:default"/>
@@ -129,6 +133,7 @@
         <setEntry value="org.eclipse.equinox.event@default:default"/>
         <setEntry value="org.eclipse.equinox.frameworkadmin.equinox@default:default"/>
         <setEntry value="org.eclipse.equinox.frameworkadmin@default:default"/>
+        <setEntry value="org.eclipse.equinox.launcher.cocoa.macosx.x86_64@default:false"/>
         <setEntry value="org.eclipse.equinox.launcher@default:default"/>
         <setEntry value="org.eclipse.equinox.p2.artifact.repository@default:default"/>
         <setEntry value="org.eclipse.equinox.p2.core@default:default"/>
@@ -160,12 +165,13 @@
         <setEntry value="org.eclipse.jface.databinding@default:default"/>
         <setEntry value="org.eclipse.jface.text@default:default"/>
         <setEntry value="org.eclipse.jface@default:default"/>
-        <setEntry value="org.eclipse.lsp4j*0.20.1.v20230228-1531@default:default"/>
-        <setEntry value="org.eclipse.lsp4j*0.21.0.v20230517-2120@default:default"/>
-        <setEntry value="org.eclipse.lsp4j.jsonrpc*0.20.1.v20230228-1531@default:default"/>
-        <setEntry value="org.eclipse.lsp4j.jsonrpc*0.21.0.v20230517-2120@default:default"/>
+        <setEntry value="org.eclipse.lsp4j.jsonrpc@default:default"/>
+        <setEntry value="org.eclipse.lsp4j@default:default"/>
         <setEntry value="org.eclipse.ltk.core.refactoring@default:default"/>
+        <setEntry value="org.eclipse.m2e.archetype.catalog@default:false"/>
         <setEntry value="org.eclipse.m2e.archetype.common@default:default"/>
+        <setEntry value="org.eclipse.m2e.archetype.descriptor@default:false"/>
+        <setEntry value="org.eclipse.m2e.archetype.maven-artifact-transfer@default:false"/>
         <setEntry value="org.eclipse.m2e.core.ui@default:default"/>
         <setEntry value="org.eclipse.m2e.core@default:default"/>
         <setEntry value="org.eclipse.m2e.jdt@default:default"/>
@@ -177,6 +183,7 @@
         <setEntry value="org.eclipse.osgi.services@default:default"/>
         <setEntry value="org.eclipse.osgi.util@default:default"/>
         <setEntry value="org.eclipse.osgi@-1:true"/>
+        <setEntry value="org.eclipse.swt.cocoa.macosx.x86_64@default:false"/>
         <setEntry value="org.eclipse.swt@default:default"/>
         <setEntry value="org.eclipse.text@default:default"/>
         <setEntry value="org.eclipse.ui.cocoa@default:false"/>
@@ -200,8 +207,14 @@
         <setEntry value="org.eclipse.xtext.xbase.lib@default:default"/>
         <setEntry value="org.gradle.toolingapi@default:default"/>
         <setEntry value="org.hamcrest.core@default:default"/>
+        <setEntry value="org.jdom2@default:default"/>
         <setEntry value="org.jsr-305@default:default"/>
         <setEntry value="org.junit@default:default"/>
+        <setEntry value="org.objectweb.asm.commons@default:default"/>
+        <setEntry value="org.objectweb.asm.tree.analysis@default:default"/>
+        <setEntry value="org.objectweb.asm.tree@default:default"/>
+        <setEntry value="org.objectweb.asm.util@default:default"/>
+        <setEntry value="org.objectweb.asm@default:default"/>
         <setEntry value="org.osgi.service.cm@default:default"/>
         <setEntry value="org.osgi.service.component@default:default"/>
         <setEntry value="org.osgi.service.device@default:default"/>
@@ -217,7 +230,7 @@
         <setEntry value="org.osgi.util.position@default:default"/>
         <setEntry value="org.osgi.util.promise@default:default"/>
         <setEntry value="org.osgi.util.xml@default:default"/>
-        <setEntry value="org.slf4j.api@default:default"/>
+        <setEntry value="org.slf4j.api*2.0.6@default:default"/>
         <setEntry value="org.tukaani.xz@default:default"/>
         <setEntry value="org.w3c.css.sac@default:default"/>
         <setEntry value="org.w3c.dom.events@default:default"/>
@@ -232,6 +245,7 @@
         <setEntry value="com.salesforce.bazel.eclipse.core@default:default"/>
         <setEntry value="com.salesforce.bazel.eclipse.jdtls@default:default"/>
         <setEntry value="com.salesforce.bazel.importedsource@default:default"/>
+        <setEntry value="com.salesforce.bazel.logback@default:false"/>
         <setEntry value="com.salesforce.bazel.sdk@default:default"/>
     </setAttribute>
     <booleanAttribute key="show_selected_only" value="false"/>
@@ -343,21 +357,6 @@
         <mapEntry key="org.eclipse.e4.ui.workbench/trace/menus" value="false"/>
         <mapEntry key="org.eclipse.e4.ui.workbench/trace/renderer" value="false"/>
         <mapEntry key="org.eclipse.e4.ui.workbench/trace/workbench" value="false"/>
-        <mapEntry key="org.eclipse.egit.core/debug" value="false"/>
-        <mapEntry key="org.eclipse.egit.core/debug/core" value="false"/>
-        <mapEntry key="org.eclipse.egit.core/debug/core/gpg" value="false"/>
-        <mapEntry key="org.eclipse.egit.core/debug/core/indexdiffcache" value="false"/>
-        <mapEntry key="org.eclipse.egit.core/debug/core/refresh" value="false"/>
-        <mapEntry key="org.eclipse.egit.core/performance" value="false"/>
-        <mapEntry key="org.eclipse.egit.ui/debug" value="false"/>
-        <mapEntry key="org.eclipse.egit.ui/debug/quickdiff" value="false"/>
-        <mapEntry key="org.eclipse.egit.ui/debug/repochangescanner" value="false"/>
-        <mapEntry key="org.eclipse.egit.ui/debug/ui" value="false"/>
-        <mapEntry key="org.eclipse.egit.ui/debug/ui/decoration" value="false"/>
-        <mapEntry key="org.eclipse.egit.ui/debug/ui/historyview" value="false"/>
-        <mapEntry key="org.eclipse.egit.ui/debug/ui/propertiestesters" value="false"/>
-        <mapEntry key="org.eclipse.egit.ui/debug/ui/repositoriesview" value="false"/>
-        <mapEntry key="org.eclipse.egit.ui/debug/ui/selection" value="false"/>
         <mapEntry key="org.eclipse.equinox.common/debug" value="false"/>
         <mapEntry key="org.eclipse.equinox.common/progress_monitors" value="false"/>
         <mapEntry key="org.eclipse.equinox.p2.core/artifacts/mirrors" value="false"/>
@@ -562,10 +561,6 @@
         <mapEntry key="org.eclipse.team.ui/dnd" value="false"/>
         <mapEntry key="org.eclipse.team.ui/history" value="false"/>
         <mapEntry key="org.eclipse.team.ui/syncmodels" value="false"/>
-        <mapEntry key="org.eclipse.tm.terminal.control/debug/log" value="false"/>
-        <mapEntry key="org.eclipse.tm.terminal.control/debug/log/VT100Backend" value="false"/>
-        <mapEntry key="org.eclipse.tm.terminal.control/debug/log/char" value="false"/>
-        <mapEntry key="org.eclipse.tm.terminal.control/debug/log/hover" value="false"/>
         <mapEntry key="org.eclipse.tm4e.ui/debug/log/GenerateTest" value="false"/>
         <mapEntry key="org.eclipse.tm4e.ui/debug/log/ThrowError" value="false"/>
         <mapEntry key="org.eclipse.tm4e.ui/trace" value="false"/>

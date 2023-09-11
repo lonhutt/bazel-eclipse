@@ -25,6 +25,7 @@ import org.eclipse.core.runtime.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.salesforce.bazel.eclipse.core.BazelRemoteLogger;
 import com.salesforce.bazel.eclipse.core.model.BazelWorkspace;
 import com.salesforce.bazel.eclipse.core.model.SynchronizeProjectViewJob;
 
@@ -48,6 +49,8 @@ public class ImportBazelWorkspaceJob extends WorkspaceJob {
         super(format("Import %s", workspace.getLocation()));
         this.workspace = workspace;
         this.projectViewToImport = projectViewToImport;
+
+        BazelRemoteLogger.info("Starting Import Bazel Workspace Job");
 
         if (!workspace.getLocation().isPrefixOf(projectViewToImport)) {
             throw new IllegalArgumentException(

@@ -16,6 +16,7 @@ import org.eclipse.jdt.ls.core.internal.IDelegateCommandHandler;
 
 import com.salesforce.bazel.eclipse.core.BazelCore;
 import com.salesforce.bazel.eclipse.core.BazelCorePlugin;
+import com.salesforce.bazel.eclipse.core.BazelRemoteLogger;
 import com.salesforce.bazel.eclipse.core.classpath.InitializeOrRefreshClasspathJob;
 import com.salesforce.bazel.eclipse.core.model.BazelWorkspace;
 import com.salesforce.bazel.eclipse.core.model.SynchronizeProjectViewJob;
@@ -29,6 +30,7 @@ public class BazelJdtLsDelegateCommandHandler implements IDelegateCommandHandler
     @Override
     public Object executeCommand(String commandId, List<Object> arguments, IProgressMonitor monitor) throws Exception {
         if (commandId != null) {
+            BazelRemoteLogger.info(commandId);
             switch (commandId) {
                 case "java.bazel.updateClasspaths":
                     var sourceFileUri = (String) arguments.get(0);
